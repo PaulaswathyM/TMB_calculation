@@ -1,0 +1,41 @@
+# How to create a boxplot for calculated tmb
+# Here I have cancer type in one column and values in the next column
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Define the file path
+file_path = 'PARP16_TMB.txt'
+
+# Read the text file into a DataFrame
+df = pd.read_csv(file_path, delimiter='\t')
+
+# Display the DataFrame
+print(df)
+# Increase the figure size and resolution
+plt.figure(figsize=(10, 6), dpi=300)  # Adjust the size and DPI as needed
+
+# Set seaborn style (optional)
+sns.set(style="whitegrid")
+
+# Create the boxplot
+sns.boxplot(x='TCGA', y='tmb', data=df)
+
+# Set labels and title
+plt.xlabel('TCGA cancer types')
+plt.ylabel('Tumor mutation burden')
+plt.title('PARP16 tmb')
+
+# Rotate x-axis labels for better visibility
+plt.xticks(rotation=90)
+
+# Export the figure as a TIFF image
+output_file = 'TMBboxplot.tiff'
+plt.savefig(output_file, format='tiff', dpi=300, bbox_inches='tight')
+
+# Show the plot (optional)
+plt.show()
+
+print(f"Figure saved as '{output_file}'")
+
+# The values here can be more filtered
